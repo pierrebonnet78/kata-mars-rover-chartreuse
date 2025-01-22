@@ -10,8 +10,8 @@ public class Roover {
         this.direction = direction;
     }
 
-    void movingForward() {
-        position.translateY(this.position.getY(), this.direction);
+    void movesForward() {
+        position.translate(this.position.getX(), this.position.getY(), this.direction);
     }
     
 
