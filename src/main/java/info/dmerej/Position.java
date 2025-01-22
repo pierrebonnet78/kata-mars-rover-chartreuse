@@ -22,7 +22,11 @@ public class Position {
         this.x = x+1;
     }
 
-    public void translateY(int y) {
-        this.y = y+1;
+    public void translateY(int y, Direction direction) {
+        if (direction == Direction.NORTH) {
+            this.y = y+1;
+        } else if (direction == Direction.SOUTH) {
+            this.y = y-1;
+        }
     }
 }
