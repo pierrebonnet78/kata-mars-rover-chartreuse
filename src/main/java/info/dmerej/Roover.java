@@ -2,13 +2,14 @@ package info.dmerej;
 
 public class Roover {
 
-    private Coordinates coordinates;
+    private Position position;
     
-    public Roover(Coordinates coordinates) {
-        this.coordinates = coordinates;
+    public Roover(Position position) {
+        this.position = position;
     }
 
     void movingForward() {
-        coordinates.setY(coordinates.getY() + 1);
+        position.translateY(this.position.getY());
     }
+
 }

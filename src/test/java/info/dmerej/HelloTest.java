@@ -9,13 +9,14 @@ public class HelloTest {
 
     @Test
     void movingForward() {
-        Coordinates coordinates = new Coordinates(4, 2);
-        Roover roover = new Roover(coordinates);
+        Position position = new Position(4, 2);
+        Roover roover = new Roover(position);
 
         roover.movingForward();
 
-        assertEquals(4, coordinates.getX());
-        assertEquals(3, coordinates.getY());
-
+        assertEquals(4, position.getX());
+        assertEquals(3, position.getY());
     }
+
+    
 }
