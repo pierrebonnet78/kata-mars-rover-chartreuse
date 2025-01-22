@@ -18,24 +18,39 @@ public class Position {
         return y;
     }
 
-    public void translateX(int x) {
-        this.x = x+1;
-    }
-
-    public void translate(int x, int y, Direction direction) {
-        switch (direction) {
-            case NORTH:
-                this.y = y+1;
+    public void translate(int x, int y, Direction direction, Command command) {
+        switch (command) {
+            case FORWARD:
+                switch (direction) {
+                    case NORTH:
+                        this.y = y+1;
+                        break;
+                    case SOUTH:
+                        this.y = y-1;
+                        break;
+                    case EAST:
+                        this.x = x+1;
+                        break;
+                    case WEST:
+                        this.x = x-1;
+                        break;
+                }
                 break;
-            case SOUTH:
-                this.y = y-1;
-                break;
-            case EAST:
-                this.x = x+1;
-                break;
-            case WEST:
-                this.x = x-1;
-                break;
+            case BACKWARD:
+                switch (direction) {
+                    case NORTH:
+                        this.y = y-1;
+                        break;
+                    case SOUTH:
+                        this.y = y+1;
+                        break;
+                    case EAST:
+                        this.x = x-1;
+                        break;
+                    case WEST:
+                        this.x = x+1;
+                        break;
+                }
         }
     }
 }

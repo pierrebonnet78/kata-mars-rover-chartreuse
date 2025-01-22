@@ -11,7 +11,11 @@ public class Roover {
     }
 
     void movesForward() {
-        position.translate(this.position.getX(), this.position.getY(), this.direction);
+        position.translate(this.position.getX(), this.position.getY(), this.direction, Command.FORWARD);
+    }
+
+    void movesBackward() {
+        position.translate(this.position.getX(), this.position.getY(), this.direction, Command.BACKWARD);
     }
     
 
