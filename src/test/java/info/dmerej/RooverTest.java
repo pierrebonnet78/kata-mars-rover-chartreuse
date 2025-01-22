@@ -3,67 +3,74 @@ package info.dmerej;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 public class RooverTest {
 
-    @Test
-    void movingForwardFacingNorth() {
-        Position position = new Position(4, 2);
-        Direction direction = Direction.NORTH;
+    @ParameterizedTest
+    @CsvSource({
+        "NORTH, 4, 2, 4, 3",
+        "SOUTH, 4, 2, 4, 1",
+        "EAST, 4, 2, 5, 2",
+        "WEST, 4, 2, 3, 2"
+    })
+    void movingForward(Direction direction, int initialX, int initialY, int expectedX, int expectedY) {
+        Position position = new Position(initialX, initialY);
         Roover roover = new Roover(position, direction);
 
         roover.movesForward();
 
-        assertEquals(4, position.getX());
-        assertEquals(3, position.getY());
+        assertEquals(expectedX, position.getX());
+        assertEquals(expectedY, position.getY());
     }
 
-    @Test
-    void movingForwardFacingSouth() {
-        Position position = new Position(4, 2);
-        Direction direction = Direction.SOUTH;
-        Roover roover = new Roover(position, direction);
-
-        roover.movesForward();
-
-        assertEquals(4, position.getX());
-        assertEquals(1, position.getY());
-    }
-
-    @Test
-    void movingForwardFacingEast() {
-        Position position = new Position(4, 2);
-        Direction direction = Direction.EAST;
-        Roover roover = new Roover(position, direction);
-
-        roover.movesForward();
-
-        assertEquals(5, position.getX());
-        assertEquals(2, position.getY());
-    }
-
-    @Test
-    void movingForwardFacingWest() {
-        Position position = new Position(4, 2);
-        Direction direction = Direction.WEST;
-        Roover roover = new Roover(position, direction);
-
-        roover.movesForward();
-
-        assertEquals(3, position.getX());
-        assertEquals(2, position.getY());
-    }
-
-    @Test
-    void movingBackwardFacingNorth() {
-        Position position = new Position(4, 2);
-        Direction direction = Direction.NORTH;
+    @ParameterizedTest
+    @CsvSource({
+        "NORTH, 4, 2, 4, 1",
+        "SOUTH, 4, 2, 4, 3",
+        "EAST, 4, 2, 3, 2",
+        "WEST, 4, 2, 5, 2"
+    })
+    void movingBackward(Direction direction, int initialX, int initialY, int expectedX, int expectedY) {
+        Position position = new Position(initialX, initialY);
         Roover roover = new Roover(position, direction);
 
         roover.movesBackward();
 
-        assertEquals(4, position.getX());
-        assertEquals(1, position.getY());
+        assertEquals(expectedX, position.getX());
+        assertEquals(expectedY, position.getY());
+    }
+
+     @ParameterizedTest
+    @CsvSource({
+        "NORTH, WEST",
+        "SOUTH, EAST",
+        "EAST, NORTH",
+        "WEST, SOUTH"
+    })
+    void movingLeft(Direction direction, Direction expectedDirection) {
+        Position position = new Position(4, 2);
+        Roover roover = new Roover(position, direction);
+
+        roover.movesLeft();
+
+        assertEquals(expectedDirection, roover.getDirection());
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+        "NORTH, EAST",
+        "SOUTH, WEST",
+        "EAST, SOUTH",
+        "WEST, NORTH"
+    })
+    void movingRight(Direction direction, Direction expectedDirection) {
+        Position position = new Position(4, 2);
+        Roover roover = new Roover(position, direction);
+
+        roover.movesRight();
+
+        assertEquals(expectedDirection, roover.getDirection());
     }
 }
